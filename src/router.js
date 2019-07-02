@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import Dashboard from "./views/Dashboard";
+import AppLayout from "./components/layouts/AppLayout";
+import User from "./views/User";
+import Login from "./views/Login";
 
 Vue.use(Router)
 
@@ -9,9 +13,25 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
+      path: '/login',
+      component: Login
+    },
+    {
       path: '/',
-      name: 'home',
-      component: Home
+      name: 'dashboard',
+      component: AppLayout,
+      children: [
+
+        {
+          path: '/',
+          component: Dashboard,
+          name: 'dashboard'
+        },
+        {
+          path:'user',
+          component: User
+        }
+      ]
     },
     {
       path: '/about',
